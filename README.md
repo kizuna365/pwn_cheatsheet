@@ -5,15 +5,35 @@
 ### docker-composeがある場合
 ```sudo docker-compose up -d```
 ### 配布されたdockerからlibcとldを取得
-```sudo docker cp -L $(container):$(libc.so.6) .```
 
-```sudo docker cp -L $(container):$(ld-linux-x86-64.so.2) .```
+作成したcontainerを確認し、libcとldのパスを把握
+```
+sudo docker ps
+sudo docker exec -it <コンテナID> /bin/sh
+```
+Hostにコピー
+```
+sudo docker cp <コンテナID>:/path/to/libc.so.6 .
+sudo docker cp <コンテナID>:/path/to/ld-linux-x86-64.so.2 .
+```
 
 ### patchelf
-```patchelf --set-rpath ./libc.so.6 $binary```
+dockerからコピーしたLibcはroot所有のため所有権の変更
 
-```patchelf --set-interpreter  ./ld-linux-x86-64.so.2 $binary```
+```sudo chown $(whoami):$(whoami) ./libc.so.6```
 
+パーミッションも変更
+
+```sudo chmod 644 ./libc.so.6```
+
+patchelfでlibcとldを付け替え
+
+```
+patchelf --set-rpath ./libc.so.6 chall
+
+patchelf --set-interpreter  ./ld-linux-x86-64.so.2 chall
+```
+これで本番環境とほぼ同じbinaryが手に入った
 
 ## 解析
 
