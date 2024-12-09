@@ -28,11 +28,16 @@ dockerからコピーしたLibcはroot所有のため所有権の変更
 
 patchelfでlibcとldを付け替え
 
-```
-patchelf --set-rpath ./libc.so.6 chall
+```patchelf --set-interpreter  ./ld-linux-x86-64.so.2 chall```
 
-patchelf --set-interpreter  ./ld-linux-x86-64.so.2 chall
-```
+libcはディレクトリ指定なのに注意
+
+```patchelf --set-rpath . chall```
+
+正しくpatchできてるかチェック
+
+```ldd chall```
+
 これで本番環境とほぼ同じbinaryが手に入った
 
 ## 解析
