@@ -5,9 +5,9 @@
 ### docker-composeがある場合
 ```sudo docker-compose up -d```
 ### 配布されたdockerからlibcとldを取得
-```sudo docker cp -L $container:/lib/x86_64-linux-gnu/libc.so.6 .```
+```sudo docker cp -L $(container):$(libc.so.6) .```
 
-```sudo docker cp -L $container:/lib64/ld-linux-x86-64.so.2 .```
+```sudo docker cp -L $(container):$(ld-linux-x86-64.so.2) .```
 
 ### patchelf
 ```patchelf --set-rpath ./libc.so.6 $binary```
