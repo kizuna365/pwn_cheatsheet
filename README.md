@@ -1,5 +1,6 @@
 # pwn備忘録
 気が向いたら追記する、未完
+何かあれば X垢:@k1_zunaまで
 
 ## docker関連
 ### docker-composeがある場合
