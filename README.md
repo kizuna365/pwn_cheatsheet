@@ -29,7 +29,7 @@ sudo docker-compose up -d
    lrwxrwxrwx  1 root root      12 Apr 30  2024 libc.so.6 -> libc-2.31.so
    $ ls -l /lib64/
    lrwxrwxrwx 1 root root 32 Apr 30  2024 ld-linux-x86-64.so.2 -> /lib/x86_64-linux-gnu/ld-2.31.so
-   $exit
+   $ exit
    ```
 
 2. ホストにコピー:  
@@ -39,8 +39,8 @@ sudo docker-compose up -d
    ```
    例
    ```
-   sudo docker cp <コンテナID>:/lib/x86_64-linux-gnu/libc-2.31.so .
-   sudo docker cp <コンテナID>:/lib/x86_64-linux-gnu/ld-2.31.so .
+   sudo docker cp <コンテナID>:/lib/x86_64-linux-gnu/libc-2.31.so ./libc.so.6
+   sudo docker cp <コンテナID>:/lib/x86_64-linux-gnu/ld-2.31.so ./ld-linux-x86-64.so.2
    ```
 
 ### patchelfの使用手順
