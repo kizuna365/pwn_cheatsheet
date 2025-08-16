@@ -18,11 +18,29 @@ sudo docker-compose up -d
    sudo docker ps
    sudo docker exec -it <コンテナID> /bin/sh
    ```
+   例
+   ```bash
+   $ ldd binary
+	linux-vdso.so.1 
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 
+	/lib64/ld-linux-x86-64.so.2 
+   $ ls -l /lib/x86_64-linux-gnu/ 
+   -rwxr-xr-x  1 root root 2000000 Apr 30  2024 libc-2.31.so
+   lrwxrwxrwx  1 root root      12 Apr 30  2024 libc.so.6 -> libc-2.31.so
+   $ ls -l /lib64/
+   lrwxrwxrwx 1 root root 32 Apr 30  2024 ld-linux-x86-64.so.2 -> /lib/x86_64-linux-gnu/ld-2.31.so
+   $exit
+   ```
 
 2. ホストにコピー:  
    ```bash
    sudo docker cp <コンテナID>:/path/to/libc.so.6 .
    sudo docker cp <コンテナID>:/path/to/ld-linux-x86-64.so.2 .
+   ```
+   例
+   ```
+   sudo docker cp <コンテナID>:/lib/x86_64-linux-gnu/libc-2.31.so .
+   sudo docker cp <コンテナID>:/lib/x86_64-linux-gnu/ld-2.31.so .
    ```
 
 ### patchelfの使用手順
